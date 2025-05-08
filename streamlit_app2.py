@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
+st.set_page_config(layout="wide")  # 페이지 설정은 반드시 첫 번째 Streamlit 명령으로!
+
 # 데이터 불러오기
 @st.cache_data
 def load_data():
@@ -12,8 +14,7 @@ def load_data():
 
 df = load_data()
 
-# 전체 페이지 레이아웃
-st.set_page_config(layout="wide")
+# 제목 및 설명
 st.title("🌍 2024 World Happiness Dashboard")
 st.markdown("📊 세계 행복지수 데이터를 한 화면에 시각적으로 확인해보세요.")
 
@@ -25,7 +26,7 @@ numeric_cols = ["Happiness_Score", "log_gdp_per_capita", "social_support",
                 "healthy_life_expectancy", "freedom_to_make_life_choices",
                 "generosity", "perceptions_of_corruption"]
 
-# 각 그래프 생성
+# 그래프 생성
 fig_map = px.choropleth(
     df,
     locations="Country",
@@ -55,7 +56,7 @@ fig_corr = px.scatter(
     title="GDP vs Happiness Score"
 )
 
-# 3분할 컬럼
+# 컬럼으로 나누기 (3분할)
 col1, col2, col3 = st.columns(3)
 
 with col1:
