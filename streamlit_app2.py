@@ -1,6 +1,3 @@
-# 최종 배포용 streamlit_app.py 코드 (파일 쓰기 없이 실행만 하도록 구성)
-
-final_code = '''
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -15,7 +12,7 @@ def load_data():
 
 df = load_data()
 
-# 화면 너비 최대로 설정
+# 전체 페이지 레이아웃
 st.set_page_config(layout="wide")
 st.title("🌍 2024 World Happiness Dashboard")
 st.markdown("📊 세계 행복지수 데이터를 한 화면에 시각적으로 확인해보세요.")
@@ -23,7 +20,7 @@ st.markdown("📊 세계 행복지수 데이터를 한 화면에 시각적으로
 # 시각화용 데이터 준비
 top10 = df.sort_values("Happiness_Score", ascending=False).head(10)
 
-# 주요 수치형 컬럼
+# 수치형 컬럼
 numeric_cols = ["Happiness_Score", "log_gdp_per_capita", "social_support",
                 "healthy_life_expectancy", "freedom_to_make_life_choices",
                 "generosity", "perceptions_of_corruption"]
@@ -58,7 +55,7 @@ fig_corr = px.scatter(
     title="GDP vs Happiness Score"
 )
 
-# 세 개의 그래프를 한 줄에 표시
+# 3분할 컬럼
 col1, col2, col3 = st.columns(3)
 
 with col1:
@@ -72,11 +69,3 @@ with col2:
 with col3:
     st.subheader("📈 GDP vs 행복 점수")
     st.plotly_chart(fig_corr, use_container_width=True)
-'''
-
-# 저장
-final_path = "/mnt/data/streamlit_app.py"
-with open(final_path, "w", encoding="utf-8") as f:
-    f.write(final_code)
-
-final_path
